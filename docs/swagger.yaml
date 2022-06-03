@@ -1,0 +1,156 @@
+basePath: /
+definitions:
+  params.DeleteUserResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  params.LoginUserRequest:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    type: object
+  params.LoginUserResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  params.RegisterUserRequest:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  params.RegisterUserResponse:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      username:
+        type: string
+    type: object
+  params.UpdateUserRequest:
+    properties:
+      email:
+        type: string
+      username:
+        type: string
+    type: object
+  params.UpdateUserResponse:
+    properties:
+      age:
+        type: integer
+      email:
+        type: string
+      id:
+        type: integer
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: teguh@email.com
+    name: Teguh Ainul Darajat
+  description: Simple Photo social media API
+  title: Instalite
+  version: "1.0"
+paths:
+  /users/:userid:
+    delete:
+      consumes:
+      - application/json
+      description: API for delete user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/params.DeleteUserResponse'
+      security:
+      - BearerAuth: []
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: API for update user
+      parameters:
+      - description: Update user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/params.UpdateUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/params.UpdateUserResponse'
+      security:
+      - BearerAuth: []
+      tags:
+      - User
+  /users/login:
+    post:
+      consumes:
+      - application/json
+      description: API for user login
+      parameters:
+      - description: Login user
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/params.LoginUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/params.LoginUserResponse'
+      tags:
+      - User
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: API for user registration
+      parameters:
+      - description: Register User
+        in: body
+        name: Body
+        required: true
+        schema:
+          $ref: '#/definitions/params.RegisterUserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/params.RegisterUserResponse'
+      tags:
+      - User
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
