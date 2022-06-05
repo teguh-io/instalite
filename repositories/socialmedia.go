@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"errors"
 	"instalite/models"
 
 	"gorm.io/gorm"
@@ -18,6 +19,7 @@ type socialMediaRepository struct {
 }
 
 func NewSocialMediaRepository(db *gorm.DB) SocialMediaRepository {
+	db.AutoMigrate(&models.SocialMedia{})
 	return &socialMediaRepository{
 		db: db,
 	}
@@ -29,13 +31,61 @@ func (smr *socialMediaRepository) CreateSocialMedia(socialMedia models.SocialMed
 }
 
 func (smr *socialMediaRepository) GetSocialMedias() ([]models.SocialMedia, error) {
-	panic("implement me")
+	var socialMedias []models.SocialMedia
+	query := `
+	social_media.id,
+	social_media.name, 
+	social_media.social_media_url,
+	social_media.user_id,	
+	users.username,
+	users.email		
+	`
+	err := smr.db.Model(&models.SocialMedia{}).Select(query).Joins("INNER JOIN users ON social_media.user_id = users.id").Scan(&socialMedias).Error
+	return socialMedias, err
 }
 
 func (smr *socialMediaRepository) UpdateSocialMediaByID(ID int, userID int, socialMedia models.SocialMedia) (*models.SocialMedia, error) {
-	panic("implement me")
+	var result models.SocialMedia
+	err := smr.db.Transaction(func(tx *gorm.DB) error {
+		err := tx.First(&result, ID).Error
+		if err != nil {
+			return err
+		}
+
+		if uint(result.UserID) != uint(userID) {
+			err := errors.New("you're forbidden to delete this data")
+			return err
+		}
+
+		err = tx.Where("id=?", ID).Updates(&socialMedia).Find(&result).Error
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+
+	return &result, err
 }
 
 func (smr *socialMediaRepository) DeleteSocialMediaByID(ID int, userID int) error {
-	panic("implement me")
+	var result models.SocialMedia
+	err := smr.db.Transaction(func(tx *gorm.DB) error {
+		err := tx.First(&result, ID).Error
+		if err != nil {
+			return err
+		}
+
+		if uint(result.UserID) != uint(userID) {
+			err := errors.New("you're forbidden to delete this data")
+			return err
+		}
+
+		err = tx.Where("id=?", ID).Delete(&result).Error
+		if err != nil {
+			return err
+		}
+		return nil
+	})
+
+	return err
 }

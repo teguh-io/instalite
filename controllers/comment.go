@@ -26,6 +26,15 @@ func NewCommentController(cs services.CommentService) CommentController {
 	}
 }
 
+// @Create Comment
+// @tag.name Comment
+// @Description API for Adding Comment
+// @Accept json
+// @Produce json
+// @Tags Comment
+// @param Body body params.CreateCommentRequest  true "Create Comment"
+// @Success 200 {object} params.CreateCommentResponse
+// @Router /comments [POST]
 func (cc *commentController) CreateComment(ctx *gin.Context) {
 	var comment params.CreateCommentRequest
 	err := ctx.ShouldBind(&comment)
@@ -48,6 +57,13 @@ func (cc *commentController) CreateComment(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, res)
 }
 
+// @Get Comment
+// @tag.name Comment
+// @Description API for Get All Comment
+// @Produce json
+// @Tags Comment
+// @Success 200 {object} params.GetCommentResponse
+// @Router /comments [GET]
 func (cc *commentController) GetCommentsByUserID(ctx *gin.Context) {
 	userID := int(ctx.Keys["id"].(float64))
 	res, err := cc.commentService.GetCommentsByUserID(userID)
@@ -61,6 +77,15 @@ func (cc *commentController) GetCommentsByUserID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
+// @Update Comment
+// @tag.name Comment
+// @Description API for Updating Comment
+// @Accept json
+// @Produce json
+// @Tags Comment
+// @param Body body params.UpdateCommentRequest true "Update Comment"
+// @Success 200 {object} params.UpdateCommentResponse
+// @Router /comments/:commentId [PUT]
 func (cc *commentController) UpdateCommentByID(ctx *gin.Context) {
 	IDStr := ctx.Param("commentid")
 	ID, err := strconv.Atoi(IDStr)
@@ -92,6 +117,13 @@ func (cc *commentController) UpdateCommentByID(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
+// @Delete Comment
+// @tag.name Comment
+// @Description API for Deleting Comment
+// @Produce json
+// @Tags Comment
+// @Success 200 {object} params.DeleteCommentResponse
+// @Router /comments/:commentId [DELETE]
 func (cc *commentController) DeleteCommentByID(ctx *gin.Context) {
 	IDStr := ctx.Param("commentid")
 	ID, err := strconv.Atoi(IDStr)

@@ -83,9 +83,7 @@ func (uc *userContorller) Login(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{
-		"token": res,
-	})
+	ctx.JSON(http.StatusOK, res)
 }
 
 // @Update User

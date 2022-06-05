@@ -26,6 +26,15 @@ func NewPhotoController(ps services.PhotoService) PhotoController {
 	}
 }
 
+// @Create Photo
+// @tag.name Photo
+// @Description API for Adding Photo
+// @Accept json
+// @Produce json
+// @Tags Photo
+// @param Body body params.CreatePhotoRequest true "Create Photo"
+// @Success 200 {object} params.CreatePhotoResponse
+// @Router /photos [POST]
 func (pc *photoController) CreatePhoto(ctx *gin.Context) {
 	photo := params.CreatePhotoRequest{}
 	err := ctx.ShouldBind(&photo)
@@ -48,6 +57,13 @@ func (pc *photoController) CreatePhoto(ctx *gin.Context) {
 	ctx.JSON(http.StatusCreated, res)
 }
 
+// @Get Photo
+// @tag.name Photo
+// @Description API for Get All Photo
+// @Produce json
+// @Tags Photo
+// @Success 200 {object} []params.GetPhotoResponse
+// @Router /photos [GET]
 func (pc *photoController) GetPhotos(ctx *gin.Context) {
 	userID := int(ctx.Keys["id"].(float64))
 	res, err := pc.photoService.GetPhotosByUserID(userID)
@@ -61,6 +77,15 @@ func (pc *photoController) GetPhotos(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, res)
 }
 
+// @Update Photo
+// @tag.name Photo
+// @Description API for Updating Photo
+// @Accept json
+// @Produce json
+// @Tags Photo
+// @param Body body params.UpdatePhotoRequest true "Update Photo"
+// @Success 200 {object} params.UpdatePhotoResponse
+// @Router /photos/:photoId [PUT]
 func (pc *photoController) UpdatePhotoByID(ctx *gin.Context) {
 	IDStr := ctx.Param("photoid")
 	ID, err := strconv.Atoi(IDStr)
@@ -93,6 +118,13 @@ func (pc *photoController) UpdatePhotoByID(ctx *gin.Context) {
 
 }
 
+// @Delete Photo
+// @tag.name Photo
+// @Description API for Deleting Photo
+// @Produce json
+// @Tags Photo
+// @Success 200 {object} params.DeletePhotoResponse
+// @Router /photos/:photoId [DELETE]
 func (pc *photoController) DeletePhotoByID(ctx *gin.Context) {
 	IDStr := ctx.Param("photoid")
 	ID, err := strconv.Atoi(IDStr)
