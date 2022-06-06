@@ -8,7 +8,7 @@ import (
 
 type CommentService interface {
 	CreateComment(userID int, request params.CreateCommentRequest) (*params.CreateCommentResponse, error)
-	GetCommentsByUserID(userID int) ([]params.GetCommentResponse, error)
+	GetCommentsByUserID() ([]params.GetCommentResponse, error)
 	UpdateCommentByID(ID int, userID int, request params.UpdateCommentRequest) (*params.UpdateCommentResponse, error)
 	DeleteCommentByID(ID, userID int) (*params.DeleteCommentResponse, error)
 }
@@ -25,17 +25,17 @@ func NewCommentRepository(cr repositories.CommentRepository) CommentService {
 
 func toGetCommentResponse(commentModel models.Comment) params.GetCommentResponse {
 	user := params.User{
-		ID:       &commentModel.UsersID,
-		Username: commentModel.UsersName,
-		Email:    commentModel.UsersEmail,
+		ID:       &commentModel.User.ID,
+		Username: commentModel.User.Username,
+		Email:    commentModel.User.Email,
 	}
 
 	photo := params.Photo{
-		ID:       commentModel.PhotosID,
-		Title:    commentModel.PhotosTitle,
-		Caption:  commentModel.PhotosCaption,
-		PhotoUrl: commentModel.PhotosUrl,
-		UserID:   commentModel.PhotosUserID,
+		ID:       commentModel.Photo.ID,
+		Title:    commentModel.Photo.Title,
+		Caption:  commentModel.Photo.Caption,
+		PhotoUrl: commentModel.Photo.PhotoUrl,
+		UserID:   commentModel.Photo.UserID,
 	}
 
 	return params.GetCommentResponse{
@@ -83,8 +83,8 @@ func (cs *commentService) CreateComment(userID int, request params.CreateComment
 
 }
 
-func (cs *commentService) GetCommentsByUserID(userID int) ([]params.GetCommentResponse, error) {
-	res, err := cs.commentRepo.GetCommentsByUserID(userID)
+func (cs *commentService) GetCommentsByUserID() ([]params.GetCommentResponse, error) {
+	res, err := cs.commentRepo.GetCommentsByUserID()
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ func (cs *commentService) UpdateCommentByID(ID int, userID int, request params.U
 	updateCommentResponse := params.UpdateCommentResponse{
 		ID:        res.ID,
 		Message:   res.Message,
-		PhotoUrl:  res.PhotosUrl,
+		PhotoUrl:  res.Photo.PhotoUrl,
 		UserID:    res.UserID,
 		UpdatedAt: res.UpdatedAt,
 	}

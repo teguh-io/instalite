@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"instalite/helpers"
 	"instalite/params"
 	"instalite/services"
 	"net/http"
@@ -38,6 +39,14 @@ func NewSocialMediaController(sms services.SocialMediaService) SocialMediaContro
 func (smc *socialMediaController) CreateSocialMedia(ctx *gin.Context) {
 	var request params.CreateSocialMediaRequest
 	err := ctx.ShouldBind(&request)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidateSocialMediaRequest(request.Name, request.SocialMediaUrl)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -99,6 +108,14 @@ func (smc *socialMediaController) UpdateSocialMediaByID(ctx *gin.Context) {
 	err = ctx.ShouldBind(&request)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidateSocialMediaRequest(request.Name, request.SocialMediaUrl)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return

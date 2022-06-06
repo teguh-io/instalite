@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"instalite/helpers"
 	"instalite/params"
 	"instalite/services"
 	"net/http"
@@ -36,8 +37,16 @@ func NewCommentController(cs services.CommentService) CommentController {
 // @Success 200 {object} params.CreateCommentResponse
 // @Router /comments [POST]
 func (cc *commentController) CreateComment(ctx *gin.Context) {
-	var comment params.CreateCommentRequest
-	err := ctx.ShouldBind(&comment)
+	var request params.CreateCommentRequest
+	err := ctx.ShouldBind(&request)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidateCommentRequest(request.Message)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -46,7 +55,7 @@ func (cc *commentController) CreateComment(ctx *gin.Context) {
 	}
 
 	userID := int(ctx.Keys["id"].(float64))
-	res, err := cc.commentService.CreateComment(userID, comment)
+	res, err := cc.commentService.CreateComment(userID, request)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -65,8 +74,7 @@ func (cc *commentController) CreateComment(ctx *gin.Context) {
 // @Success 200 {object} params.GetCommentResponse
 // @Router /comments [GET]
 func (cc *commentController) GetCommentsByUserID(ctx *gin.Context) {
-	userID := int(ctx.Keys["id"].(float64))
-	res, err := cc.commentService.GetCommentsByUserID(userID)
+	res, err := cc.commentService.GetCommentsByUserID()
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -100,6 +108,14 @@ func (cc *commentController) UpdateCommentByID(ctx *gin.Context) {
 	err = ctx.ShouldBind(&request)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidateCommentRequest(request.Message)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return

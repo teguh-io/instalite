@@ -8,7 +8,7 @@ import (
 
 type PhotoService interface {
 	CreatePhoto(userID int, request params.CreatePhotoRequest) (*params.CreatePhotoResponse, error)
-	GetPhotosByUserID(userID int) ([]params.GetPhotoResponse, error)
+	GetPhotosByUserID() ([]params.GetPhotoResponse, error)
 	UpdatePhotoByID(ID int, userID int, request params.UpdatePhotoRequest) (*params.UpdatePhotoResponse, error)
 	DeletePhotoByID(ID int, userID int) (*params.DeletePhotoResponse, error)
 }
@@ -72,8 +72,8 @@ func (ps *photoService) CreatePhoto(userID int, request params.CreatePhotoReques
 	}
 	return &createPhotoResponse, err
 }
-func (ps *photoService) GetPhotosByUserID(userID int) ([]params.GetPhotoResponse, error) {
-	result, err := ps.photoRepo.GetPhotosByUserID(userID)
+func (ps *photoService) GetPhotosByUserID() ([]params.GetPhotoResponse, error) {
+	result, err := ps.photoRepo.GetPhotosByUserID()
 	if err != nil {
 		return nil, err
 	}

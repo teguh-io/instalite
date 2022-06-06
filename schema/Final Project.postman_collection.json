@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"admin2\",\n    \"password\": \"admin\",\n    \"email\": \"admin2@email.com\",\n    \"age\": 50\n}",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admins\",\n    \"email\": \"admin@email.com\",\n    \"age\": 21\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"password\": \"admin\",\n    \"email\": \"admin2@email.com\"\n}",
+					"raw": "{\n    \"password\": \"admins\",\n    \"email\": \"admins@email.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -72,7 +72,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlkIjo0OH0.w4zJFJKoGPQpcMJrFqGusxGntxvWLZeGjnU8dAO7lNI",
 							"type": "string"
 						}
 					]
@@ -81,7 +81,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\": \"\",\n    \"email\": \"lok123aaa@email.com\"\n}",
+					"raw": "{\n    \"username\": \"admin super\",\n    \"email\": \"admin@gmail.com\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -89,7 +89,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/users/6",
+					"raw": "http://localhost:8080/users/48",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -97,7 +97,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"6"
+						"48"
 					]
 				}
 			},
@@ -111,7 +111,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlkIjo0NH0.e7hpoOiEKOkXRjiiZdAPV0ahp9SskbSSfp2HtOblkjk",
 							"type": "string"
 						}
 					]
@@ -119,7 +119,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/users/20",
+					"raw": "http://localhost:8080/users/44",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -127,7 +127,7 @@
 					"port": "8080",
 					"path": [
 						"users",
-						"20"
+						"44"
 					]
 				}
 			},
@@ -170,7 +170,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlkIjo0OH0.w4zJFJKoGPQpcMJrFqGusxGntxvWLZeGjnU8dAO7lNI",
 							"type": "string"
 						}
 					]
@@ -178,15 +178,13 @@
 				"method": "POST",
 				"header": [],
 				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Meong Picture\",\n    \"caption\": \"Meow meow meow\",\n    \"photo_url\": \"https://www.google.com/search?q=cat\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
-					]
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/photos",
@@ -210,7 +208,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1heXVAZW1haWwuY29tIiwiaWQiOjUwfQ.qIEYrL_Vybi0lp_Pm574f_K1snMjAlqhkEs8K9UQZkk",
 							"type": "string"
 						}
 					]
@@ -219,7 +217,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"cob3a\",\n    \"caption\": \"coba1\",\n    \"photo_url\": \"c1oba\"\n}",
+					"raw": "{\n    \"title\": \"Kangoroo\",\n    \"caption\": \"edited caption\",\n    \"photo_url\": \"https://www.google.com/search?q=kangoroo\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -227,7 +225,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/photos/9",
+					"raw": "http://localhost:8080/photos/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -235,7 +233,7 @@
 					"port": "8080",
 					"path": [
 						"photos",
-						"9"
+						"20"
 					]
 				}
 			},
@@ -249,7 +247,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGVtYWlsLmNvbSIsImlkIjoxOX0.UPw9ugx2Eg_qM4-Hbe3gKNF2h-XncKH2J9B3EbtJyoQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1heXVAZW1haWwuY29tIiwiaWQiOjUwfQ.qIEYrL_Vybi0lp_Pm574f_K1snMjAlqhkEs8K9UQZkk",
 							"type": "string"
 						}
 					]
@@ -257,7 +255,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/photos/13",
+					"raw": "http://localhost:8080/photos/20",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -265,7 +263,7 @@
 					"port": "8080",
 					"path": [
 						"photos",
-						"13"
+						"20"
 					]
 				}
 			},
@@ -279,7 +277,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
 							"type": "string"
 						}
 					]
@@ -288,7 +286,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"message\": \"MEONG\",\n    \"photo_id\": 13\n}",
+					"raw": "{\n    \"message\": \"cute cat\",\n    \"photo_id\": 18\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -317,7 +315,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
 							"type": "string"
 						}
 					]
@@ -325,14 +323,15 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/comments",
+					"raw": "http://localhost:8080/comments/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"comments"
+						"comments",
+						"4"
 					]
 				}
 			},
@@ -346,7 +345,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
 							"type": "string"
 						}
 					]
@@ -363,7 +362,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/comments/2",
+					"raw": "http://localhost:8080/comments/4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -371,7 +370,37 @@
 					"port": "8080",
 					"path": [
 						"comments",
-						"2"
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete comment",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/comments/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comments",
+						"4"
 					]
 				}
 			},
@@ -385,7 +414,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
 							"type": "string"
 						}
 					]
@@ -447,8 +476,39 @@
 		{
 			"name": "update social media",
 			"request": {
-				"method": "GET",
-				"header": []
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"twitter\",\n    \"social_media_url\": \"twitter.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/socialmedias/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"socialmedias",
+						"9"
+					]
+				}
 			},
 			"response": []
 		},
@@ -460,7 +520,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluMkBlbWFpbC5jb20iLCJpZCI6MjB9.H2cc4xgud_l6xuoyDoYd0ZHT2OcSfCz6G06C0yj86iQ",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluc0BlbWFpbC5jb20iLCJpZCI6NDl9.p8JzHIswk7WNYrOE6Qg8mft4TlX6gh35ShknylvfJ6I",
 							"type": "string"
 						}
 					]
@@ -468,7 +528,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/socialmedias/5",
+					"raw": "http://localhost:8080/socialmedias/9",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -476,7 +536,7 @@
 					"port": "8080",
 					"path": [
 						"socialmedias",
-						"5"
+						"9"
 					]
 				}
 			},

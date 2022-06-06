@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"instalite/helpers"
 	"instalite/params"
 	"instalite/services"
 	"net/http"
@@ -36,8 +37,16 @@ func NewPhotoController(ps services.PhotoService) PhotoController {
 // @Success 200 {object} params.CreatePhotoResponse
 // @Router /photos [POST]
 func (pc *photoController) CreatePhoto(ctx *gin.Context) {
-	photo := params.CreatePhotoRequest{}
-	err := ctx.ShouldBind(&photo)
+	request := params.CreatePhotoRequest{}
+	err := ctx.ShouldBind(&request)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidatePhotoRequest(request.Title, request.PhotoUrl)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
@@ -46,7 +55,7 @@ func (pc *photoController) CreatePhoto(ctx *gin.Context) {
 	}
 
 	userID := int(ctx.Keys["id"].(float64))
-	res, err := pc.photoService.CreatePhoto(userID, photo)
+	res, err := pc.photoService.CreatePhoto(userID, request)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -65,8 +74,7 @@ func (pc *photoController) CreatePhoto(ctx *gin.Context) {
 // @Success 200 {object} []params.GetPhotoResponse
 // @Router /photos [GET]
 func (pc *photoController) GetPhotos(ctx *gin.Context) {
-	userID := int(ctx.Keys["id"].(float64))
-	res, err := pc.photoService.GetPhotosByUserID(userID)
+	res, err := pc.photoService.GetPhotosByUserID()
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
 			"error": err.Error(),
@@ -100,6 +108,14 @@ func (pc *photoController) UpdatePhotoByID(ctx *gin.Context) {
 	err = ctx.ShouldBind(&request)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidatePhotoRequest(request.Title, request.PhotoUrl)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
 		})
 		return

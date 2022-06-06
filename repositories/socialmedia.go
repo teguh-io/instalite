@@ -32,15 +32,7 @@ func (smr *socialMediaRepository) CreateSocialMedia(socialMedia models.SocialMed
 
 func (smr *socialMediaRepository) GetSocialMedias() ([]models.SocialMedia, error) {
 	var socialMedias []models.SocialMedia
-	query := `
-	social_media.id,
-	social_media.name, 
-	social_media.social_media_url,
-	social_media.user_id,	
-	users.username,
-	users.email		
-	`
-	err := smr.db.Model(&models.SocialMedia{}).Select(query).Joins("INNER JOIN users ON social_media.user_id = users.id").Scan(&socialMedias).Error
+	err := smr.db.Preload("User").Find(&socialMedias).Error
 	return socialMedias, err
 }
 

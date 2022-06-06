@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"instalite/helpers"
 	"instalite/params"
 	"instalite/services"
 	"net/http"
@@ -45,6 +46,14 @@ func (uc *userContorller) Register(ctx *gin.Context) {
 		return
 	}
 
+	err = helpers.ValidateUserRegisterRequest(user)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
 	res, err := uc.userService.Register(user)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
@@ -75,6 +84,14 @@ func (uc *userContorller) Login(ctx *gin.Context) {
 		return
 	}
 
+	err = helpers.ValidateUserLoginRequest(user)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
 	res, err := uc.userService.Login(user)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{
@@ -98,6 +115,14 @@ func (uc *userContorller) Login(ctx *gin.Context) {
 func (uc *userContorller) UpdateUserByID(ctx *gin.Context) {
 	user := params.UpdateUserRequest{}
 	err := ctx.ShouldBind(&user)
+	if err != nil {
+		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
+			"error": err.Error(),
+		})
+		return
+	}
+
+	err = helpers.ValidateUserUpdateRequest(user)
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),

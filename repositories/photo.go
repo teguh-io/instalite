@@ -9,7 +9,7 @@ import (
 
 type PhotoRepository interface {
 	CreatePhoto(photo models.Photo) (*models.Photo, error)
-	GetPhotosByUserID(UserID int) ([]models.Photo, error)
+	GetPhotosByUserID() ([]models.Photo, error)
 	UpdatePhotoByID(ID int, photo models.Photo) (*models.Photo, error)
 	DeletePhotoByID(ID int, userID int) error
 }
@@ -30,13 +30,9 @@ func (pr *photoRepository) CreatePhoto(photo models.Photo) (*models.Photo, error
 	return &photo, err
 }
 
-func (pr *photoRepository) GetPhotosByUserID(userID int) ([]models.Photo, error) {
+func (pr *photoRepository) GetPhotosByUserID() ([]models.Photo, error) {
 	var photos []models.Photo
-	err := pr.db.Model(&models.Photo{}).Select(
-		"photos.id, photos.title, photos.caption, photos.photo_url, photos.user_id, photos.created_at, photos.updated_at, users.username, users.email",
-	).Joins(
-		"INNER JOIN users ON users.id = photos.user_id;", userID,
-	).Scan(&photos).Error
+	err := pr.db.Preload("User").Find(&photos).Error
 
 	return photos, err
 
